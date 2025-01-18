@@ -33,28 +33,28 @@ time.sleep(WAIT_TIME)
 
 #finds text boxes for courses credits and grades
 text_boxes = list(driver.find_elements(by=By.CSS_SELECTOR, value='tr td input'))
-#fills boxes
 
+#fills boxes
 ind=0
 for t in text_boxes[1::3]:
     t.click()
-    time.sleep(0.1)
+    time.sleep(WAIT_TIME)
     actions.send_keys(f'{list(df.Credits)[ind]}').perform()
     ind+=1
-    time.sleep(0.1)
+    time.sleep(WAIT_TIME)
 ind=0
 for t in text_boxes[2::3]:
     t.click()
-    time.sleep(0.1)
+    time.sleep(WAIT_TIME)
     grade = list(df.Grades)[ind]
-    if grade == '31': grade = '30L'
-    actions.send_keys(f'{grade}').perform()
+    if grade == 31: actions.send_keys(f'30L').perform()
+    else: actions.send_keys(f'{grade}').perform()
     ind+=1
-    time.sleep(0.1)
+    time.sleep(WAIT_TIME)
 
 #calculates gpa
 driver.find_element(by=By.CSS_SELECTOR, value='button#calculateGPAButton').click()
 time.sleep(WAIT_TIME)
 gpa = driver.find_element(by=By.CSS_SELECTOR, value='span#cGPA').text
-
+driver.quit()
 print(f'GPA: {gpa}')
