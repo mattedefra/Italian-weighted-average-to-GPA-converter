@@ -34,7 +34,7 @@ time.sleep(WAIT_TIME)
 #finds text boxes for courses credits and grades
 text_boxes = list(driver.find_elements(by=By.CSS_SELECTOR, value='tr td input'))
 
-#fills boxes
+#fills boxes, had to use this splicing method to skip "Course name" entry since it's irrelevant for the purpose of the script
 ind=0
 for t in text_boxes[1::3]:
     t.click()
